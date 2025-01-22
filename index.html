@@ -5,41 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>音声教材 UI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-bottom: 80px; /* Audio player分のスペースを確保 */
+        }
+        .audio-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h2>音声教材1月【23年度EBコース】</h2>
-        <p>必読表示の期間：2023.4.3 - 2023.4.10</p>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <img src="images/cartoon1.jpg" class="card-img-top" alt="Cartoon 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Cartoon 1</h5>
-                        <p class="card-text">Course Book 3（12ページ）</p>
-                        <audio controls>
-                            <source src="audio/cartoon1.mp3" type="audio/mpeg">
-                            お使いのブラウザは音声をサポートしていません。
-                        </audio>
-                    </div>
+<div class="container mt-4">
+    <h2 class="text-center">音声教材1月【23年度EBコース】</h2>
+    <p class="text-center">必読表示の期間：2023.4.3 - 2023.4.10</p>
+
+    <div class="row">
+        <!-- Cartoon 1 -->
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card">
+                <img src="images/cartoon1.jpg" class="card-img-top img-fluid" alt="Cartoon 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Cartoon 1</h5>
+                    <p class="card-text">Course Book 3（12ページ）</p>
+                    <button class="btn btn-primary play-btn" data-src="audio/cartoon1.mp3">再生</button>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-6">
-                <div class="card">
-                    <img src="images/chant1.jpg" class="card-img-top" alt="Chant 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Chant 1</h5>
-                        <p class="card-text">Course Book 3（13ページ）</p>
-                        <audio controls>
-                            <source src="audio/chant1.mp3" type="audio/mpeg">
-                            お使いのブラウザは音声をサポートしていません。
-                        </audio>
-                    </div>
+        <!-- Chant 1 -->
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card">
+                <img src="images/chant1.jpg" class="card-img-top img-fluid" alt="Chant 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Chant 1</h5>
+                    <p class="card-text">Course Book 3（13ページ）</p>
+                    <button class="btn btn-primary play-btn" data-src="audio/chant1.mp3">再生</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- 共通オーディオコントロール -->
+<div class="audio-player">
+    <audio id="audioControl" controls style="width: 100%;">
+        お使いのブラウザは audio タグをサポートしていません。
+    </audio>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const audioControl = document.getElementById('audioControl');
+        const playButtons = document.querySelectorAll('.play-btn');
+
+        playButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const audioSrc = this.getAttribute('data-src');
+                audioControl.src = audioSrc;
+                audioControl.play();
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
